@@ -100,9 +100,9 @@ jobs:
           git config user.email "root@laogw.link"
       - name: change image tag to deploy dev
         run: |
-          sed "s|image: ghcr\.io/champalab/demo-api:[^ ]*|image: ghcr.io/champalab/demo-api:${GITHUB_SHA}|" infra/gitops/dev/deployment.yaml > tmp_deployment.yaml
-          mv tmp_deployment.yaml infra/gitops/dev/deployment.yaml
-          git add infra/gitops/dev/deployment.yaml
+          sed "s|image: ghcr\.io/champalab/demo-api:[^ ]*|image: ghcr.io/champalab/demo-api:${GITHUB_SHA}|" deploy/deployment.yaml > tmp_deployment.yaml
+          mv tmp_deployment.yaml deploy/deployment.yaml
+          git add deploy/deployment.yaml
           git commit -m "[skip actions] 🤖 change dev docker image version to ${GITHUB_SHA}"
-          git pull origin develop --rebase
+          git pull origin main --rebase
           git push
